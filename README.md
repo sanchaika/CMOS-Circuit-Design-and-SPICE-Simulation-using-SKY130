@@ -583,29 +583,67 @@ RISE-FALL delay being approximately equal for Wp/Lp = 2 Wn/Ln, shows "Symmetry" 
 
 <img width="1244" height="667" alt="image" src="https://github.com/user-attachments/assets/c0d1d632-3ac9-45bd-9d65-8f6585d44f3d" />
 
+# NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
+## Static behaviour evaluation-CMOS inverter robustness-Noise Margin
+## L1 Introduction to Noise Margin
+Now we will learn CMOS inverter's robustness towards the Noise Margin. Also we see the Noise margin evaluation for CMOS inverter. 
 
+Noise Margin: It is a measure of how much unwanted electrical noise a logic circuit can tolerate on its input without producing an incorrect output. 
+For example if we consider an ideal Inverter, for inputs 0/1 it gives output as 1/0. The slope of switch is infinite. 
+But practically the slope won't be infinite, due to presence of resistances and capacitances there will be delay. Therefore we will get a finite slope 
 
+<img width="911" height="571" alt="Screenshot 2026-06-05 115433" src="https://github.com/user-attachments/assets/463695c4-ea83-489a-8003-45a1704a281d" />
 
+whenever the input is between 0 to VIL(input low voltage); the output will be VOH(output high). 
+And whenever the input is between VIH(input high voltage) and Vdd; output will be VOL(output low voltage). 
 
+<img width="799" height="624" alt="Screenshot 2026-06-05 115556" src="https://github.com/user-attachments/assets/3a103fc7-12e7-48f7-be79-b141cc6304b3" />
 
+## L2 Noise Margin voltage paramters
+Considering the more practical scenarios and non idealities of an inverter, the curve we get is as shown below. So here the when the 0 output is VOH output is 0VOL as VOH will be output high for the next inverter which will be connected and 0 as it will be the output low for the next inverter. 
+Also, the slope is approximately -1, as for increase in input, output is reducing. 
 
+<img width="964" height="628" alt="Screenshot 2026-06-05 120022" src="https://github.com/user-attachments/assets/6d6b3d8d-7497-4c38-b422-62eda7c04c6f" />
 
+## L3 Noise margin equation and summary
+Now we will calculate the noise margin equation, for that we will plot the voltages on the same scale.
 
+<img width="700" height="404" alt="image" src="https://github.com/user-attachments/assets/f6e45cf0-689f-4804-9071-a90bedb4ff9c" />
 
+Noise margin High NH - value between VIH and VOH. 
+Noise Margin Low NL - value between VIL and VOL. 
 
+Any value which lies in between noise margins is considered either 1/0 and considered to be tolerable. Apart from this region the value is "Undefined" and the logic level can swing between 'high' and 'low'.
 
+<img width="841" height="521" alt="Screenshot 2026-06-05 120252" src="https://github.com/user-attachments/assets/04c18e50-b0c3-457e-b2c2-8e2348dd77a1" />
 
+<img width="888" height="548" alt="Screenshot 2026-06-05 120752" src="https://github.com/user-attachments/assets/f6105724-b4d2-4528-b4dc-decc920a4065" />
 
+## L4 Noise margin variation with respect to PMOS width
+We will evaluate the noise margin depending upon the PMOS width and ultimately prove that how CMOS inverter is robust to the noise margins.
+First, we will find the points where the slope = -1 and extend the lines towards x-y axis.
 
+<img width="1307" height="712" alt="Screenshot 2026-06-05 121139" src="https://github.com/user-attachments/assets/ed1716ee-9e30-46b9-8a22-0004ff17197c" />
 
+<img width="1326" height="587" alt="Screenshot 2026-06-05 133257" src="https://github.com/user-attachments/assets/6cb14026-fe48-4390-813d-fd181451ba9e" />
 
+<img width="1328" height="575" alt="Screenshot 2026-06-05 133324" src="https://github.com/user-attachments/assets/352be46a-f199-4de7-9084-35d43a69471e" />
 
+<img width="1314" height="601" alt="Screenshot 2026-06-05 133356" src="https://github.com/user-attachments/assets/a4a4e7f7-61c3-4dac-806e-7e808ae4d732" />
 
+<img width="1307" height="587" alt="Screenshot 2026-06-05 133417" src="https://github.com/user-attachments/assets/02bf165f-6b52-43f0-85e1-6d2a01d95700" />
 
+For (W/L)p=4(W/L)p and (W/L)p=5(W/L)p noise margins are same, so even if we increase the widths further noise margin will be static. 
 
+<img width="761" height="289" alt="Screenshot 2026-06-05 121227" src="https://github.com/user-attachments/assets/68735092-c2a3-4ed0-bd26-bb8933d0efea" />
 
+Here also we can verify the robustness of CMOS inverter. 
+Also we come to know the ranges for "Digital design" and "Analog design" in the CMOS inverter.
 
+<img width="1201" height="634" alt="Screenshot 2026-06-05 133755" src="https://github.com/user-attachments/assets/d255c8f6-46e7-4425-8f0e-46c6f503b5cf" />
 
+<img width="1193" height="621" alt="image" src="https://github.com/user-attachments/assets/952e5e9a-72f2-4d2c-95d8-e0eda183a8fd" />
 
-
+## L5 Sky130 Noise margin labs
+We will now plot Noise margins
 
