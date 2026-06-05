@@ -359,16 +359,87 @@ When |Vgs|>Vt, device is ON and it acts as closed switch
 
 ## L2 Introduction to standard MOS voltage current parameters
 
+We are trying to get the equivalent circuit of CMOS when Vin is 'high' and 'low', so that we can get the Voltage Transfer Characteristics (VTC) and therefore calculate the delay of the cell.
+ 
+1. When we take Vin as 'high' and equal to Vdd, PMOS will be OFF and NMOS will be ON.
+2. When we take Vin as 'low' or equal to '0', PMOS will be ON and NMOS will be OFF. 
 
+<img width="1157" height="610" alt="image" src="https://github.com/user-attachments/assets/65ac88ef-2cde-4d30-9a6b-bd3bad8a93e7" />
 
+1. when Vin=Vdd there is a direct path that exists between Vss and Vout, the capacitor CL discharges through the resistor.
+2. when Vin=0 there is a direct path between Vdd and Vout, CL charges.
 
+Let us give the naming convention of the CMOS:
 
+<img width="477" height="591" alt="image" src="https://github.com/user-attachments/assets/ad029fdb-9ee6-4e73-871d-e271b2b72273" />
 
+ current in both the condition is Idsn(drain to source for NMOS) and Idsp(Drain to source for PMOS) And Idsp = -Idsn, both are opposite in direction to each other.
 
+ ## L3 PMOS/NMOS drain current vs drain voltage
 
+ <img width="378" height="591" alt="image" src="https://github.com/user-attachments/assets/9e3e1b01-f900-4f1a-8b4e-afbf3c1ecc10" />
 
+ The curve between Idsn Vs Vdsn and Idsp Vs Vdsp, it is as shown below.
 
+ <img width="838" height="423" alt="image" src="https://github.com/user-attachments/assets/f4e784ed-f881-437e-92a6-9812decaabba" />
 
+## L4 Step1- Convert PMOS gate-source-voltage to Vin
+
+We have seen various internal voltages, but actually in terms of user's perspective we can't see the internal voltages and only see the external Vin and Vout. From these we calculate the VTC and eventually we get to know the delay.
+
+Now we will see the steps to obtain Voltage Transfer Characteristics(VTC) for static CMOS inverter: Assumption: Let us assume that it is a long channel device with Vdd=2V
+
+<img width="351" height="229" alt="image" src="https://github.com/user-attachments/assets/186d48ed-baf2-42f2-aa93-3095041d3490" />
+
+We will fix the Vgs values as shown below 
+We know that Vgsp= Vin-Vdd, So we get the above values.So we get Vin = Vgsp+Vdd, we are trying to convert all the voltages as function of Vin and Vout.
+We will try to plot the graph of PMOS in terms of Idsn, the plot will be as shown below. We can see that the corresponding Vin value of Vgsp is being plotted as shown in the above table.
+
+<img width="821" height="423" alt="image" src="https://github.com/user-attachments/assets/d295a218-6464-4298-aeec-e807037d1664" />
+
+## L5 Step2 & Step3- Convert PMOS and NMOS drain-source-voltage to Vout
+Now we will be converting the Vdsp and function of output voltage Vin. We know Vdsp = Vout-Vdd.
+Let us convert Vdsp into Vout. So to get Vout there is a shift of Vdd towards left hand side.
+
+<img width="1320" height="385" alt="image" src="https://github.com/user-attachments/assets/ae4dd0d4-12e9-4aa4-9d7f-92fa7e5014b4" />
+
+We can see that whenever Vout=2V that means Vdsp=0V and Vdd=2V (given), then The current is zero and capacitor at the output is discharged. This is true only when PMOS is in combination with NMOS and forms a CMOS inverter.
+
+Let us take another example, when Vout=0V, that means -Vdsp=2V and Vdd=2V, so at every gate voltage of Vin we will see a finite current whenever Vout=0V. As Vout=0V, the capacitor is completely discharged and we need to charge that, so that is the charging current required. 
+So, here we get the load curve for PMOS
+
+<img width="499" height="386" alt="image" src="https://github.com/user-attachments/assets/c074b5bf-1069-4c1b-a9b0-a9fa4ce9a29e" />
+
+Now we will try to get the "load curve" for NMOS transistor from this equations.
+
+<img width="220" height="65" alt="image" src="https://github.com/user-attachments/assets/87150da9-8436-4e7d-a012-f4cd6baf490a" />
+
+It is actually simple as Vgsn = Vin and Vdsn = Vout, directly we can get the graphs.
+
+<img width="401" height="283" alt="image" src="https://github.com/user-attachments/assets/920c0822-7bb1-433f-aa13-0e1eb6f7b657" />
+
+<img width="875" height="369" alt="image" src="https://github.com/user-attachments/assets/19e4b690-dbfe-4244-b268-a03f38ccdcb5" />
+
+## L6 Step4- Merge PMOS-NMOS load curves and plot VTC
+Now,merge the above two curves and obtain the voltage transfer characteristics(VTC) for CMOS inverter.
+
+<img width="964" height="288" alt="image" src="https://github.com/user-attachments/assets/7eabf5f5-ae93-4c64-bd35-0f8dbe32016c" />
+
+find out the common point between Vin and Vout of both NMOS and PMOS.
+
+<img width="425" height="272" alt="image" src="https://github.com/user-attachments/assets/1f0b96b1-df76-4fa4-b71c-3555350d4341" />
+
+So the range of Vin and Vout is 0V-2V.
+
+When Vin = 0V, Vout = 2V; NMOS is Cut Off and PMOS is in Linear region.
+When Vin = 0.5V, 1.5V<Vout<2V; NMOS is in Saturation region and PMOS is in Linear region.
+When Vin = 1V, 0.5V<Vout<1.5V; NMOS and PMOS are in Saturation region.
+When Vin = 1.5V, 0<Vout<0.5V; NMOS is Linear region and PMOS is in Saturation region.
+When Vin = 2V, Vout = 0V; NMOS is in linear region and PMOS is Cut Off.
+
+<img width="1091" height="508" alt="image" src="https://github.com/user-attachments/assets/06cf38f2-b4bf-44c7-a1f8-c92c266eb17f" />
+
+# NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
 
 
 
