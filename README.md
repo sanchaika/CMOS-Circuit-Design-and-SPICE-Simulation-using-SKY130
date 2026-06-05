@@ -440,8 +440,138 @@ When Vin = 2V, Vout = 0V; NMOS is in linear region and PMOS is Cut Off.
 <img width="1091" height="508" alt="image" src="https://github.com/user-attachments/assets/06cf38f2-b4bf-44c7-a1f8-c92c266eb17f" />
 
 # NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
+## Voltage transfer characteristics-SPICE simulations
+## L1 SPICE deck creation for CMOS inverter
+SPICE Deck
+component connectivity
 
+component values
 
+nodes identification
+
+<img width="769" height="591" alt="image" src="https://github.com/user-attachments/assets/bab3f079-6bb8-46bc-9993-c7d2077e52cd" />
+
+name nodes
+
+<img width="554" height="543" alt="image" src="https://github.com/user-attachments/assets/56fbe28a-9d63-486c-8298-ede7c85dd043" />
+
+Now to write SPICE deck:
+
+<img width="1188" height="468" alt="image" src="https://github.com/user-attachments/assets/cc915119-9604-42de-b76d-c0ba8c07cbba" />
+
+## L2 SPICE simulation for CMOS inverter
+
+Simulation Commands
+
+The gate input voltage sweeps from 0 to 2.5V with steps of 0.05. We need to find the VTC, for this we will be sweeping the input voltage and measuring the output voltage.
+Final step is to describe the Model files, all the information about the technological parameteres is given inside the model files.
+
+<img width="1242" height="501" alt="image" src="https://github.com/user-attachments/assets/6b345e40-b79a-4eb6-9d8e-5b55be96c9bf" />
+
+Now, SPICE waveform : Wn=Wp=0.375u, Ln=Lp=0.25u, Wn/ln=Wp/Lp=1.5
+
+<img width="660" height="529" alt="image" src="https://github.com/user-attachments/assets/8316d8cd-91c8-41d3-8f18-6de4f0dd1f5b" />
+
+And, SPICE waveform :  Wn= 0.375u, Wp= 0.9375u, Ln,p=0.25u; Wn/Ln=1.5, Wp/Lp=2.5 (PMOS width is 2.5 times more than NMOS)
+
+<img width="747" height="569" alt="image" src="https://github.com/user-attachments/assets/2d2600b3-35d6-4bcc-b0af-0f1c290cbb7d" />
+
+Observation :  the previous graph is left shifted slightly. This happens because NMOS is more stronger than PMOS in previous graph.
+
+## L3 Labs Sky130 SPICE simulation for CMOS
+
+<img width="863" height="718" alt="image" src="https://github.com/user-attachments/assets/22bfe93d-23ec-458c-b39d-92d4b1dc6809" />
+
+## Static behavior evaluation – CMOS inverter robustness – Switching Threshold
+##  L1 Switching Threshold, Vm
+
+<img width="1174" height="579" alt="image" src="https://github.com/user-attachments/assets/49611c40-1e8a-4727-9823-1e876fb0c071" />
+
+To find out the Switching threshold, Vm in both the cases by drawing a 45 degree line.
+So, in first case Vm comes out to be somewhere around 0.9V and in second case Vm=1.2V.
+
+<img width="1146" height="434" alt="image" src="https://github.com/user-attachments/assets/291353a5-3071-49a2-82ea-d3a4a7a3c867" />
+
+here PMOS and NMOS both are in saturation region.
+Current flows from both pmos and nmos
+
+<img width="1100" height="512" alt="image" src="https://github.com/user-attachments/assets/47082040-5cf1-4e14-8f29-c2b137ecad15" />
+
+## L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n
+
+<img width="512" height="253" alt="image" src="https://github.com/user-attachments/assets/517e1180-bc00-4930-9695-e8f5bb7a669e" />
+
+<img width="546" height="211" alt="image" src="https://github.com/user-attachments/assets/d28f524e-e4a5-4037-baf6-72793a5b3388" />
+
+<img width="796" height="225" alt="image" src="https://github.com/user-attachments/assets/c4932e26-8af9-4ecc-9a1a-18b4be1d1eda" />
+
+## L3 Analytical expression of (W/L)p and (W/L)n as a function of Vm
+For calculating the value of W/L for PMOS and NMOS when Vm is given.
+
+letting Switching threshold is exatly half of the power supply Vdd = 2.5V, therefore required Vm = 1.25V.
+<img width="900" height="131" alt="image" src="https://github.com/user-attachments/assets/5f5e0153-8ae7-4bd9-8aa3-43fb759f5eb5" />
+
+<img width="837" height="118" alt="image" src="https://github.com/user-attachments/assets/90d8b51f-f8d4-4265-8d93-040fc84c3998" />
+
+<img width="477" height="89" alt="image" src="https://github.com/user-attachments/assets/0123bbb6-4760-452d-87fe-3ad1777aa9ab" />
+
+<img width="760" height="85" alt="image" src="https://github.com/user-attachments/assets/a8b6eb79-0e73-49d3-b66b-e28314cbcd31" />
+
+<img width="503" height="117" alt="image" src="https://github.com/user-attachments/assets/adcc711c-2c5e-42f9-98fa-e9af80a932c1" />
+
+<img width="531" height="139" alt="image" src="https://github.com/user-attachments/assets/1a667d8a-3717-423c-a456-c25c63fb0493" />
+
+As RHS all are constants. So , If we know Vm then we can get the W/L ratios.
+
+<img width="297" height="225" alt="image" src="https://github.com/user-attachments/assets/3509753f-4ecf-4d6b-b5e4-2ff6762125bf" />
+
+## L4 Static and dynamic simulation of CMOS inverter
+When Wn/Ln = Wp/Lp = 1.5
+
+<img width="1115" height="554" alt="image" src="https://github.com/user-attachments/assets/e8dcb91a-9e15-426e-89ec-348c60bd9cd1" />
+
+To find Rise time and Fall time => We do transient analysis
+
+<img width="1283" height="482" alt="image" src="https://github.com/user-attachments/assets/5f608a46-9043-4c61-8b1a-2899ce08ab4a" />
+
+##  L5 Static and dynamic simulation of CMOS inverter with increased PMOS width
+Now when Wp/Lp = 2 Wn/Ln
+   
+<img width="746" height="603" alt="image" src="https://github.com/user-attachments/assets/dc5ca89c-750d-4cf1-b742-836ddf77e867" />
+
+When Wp/Lp = 3 Wn/Ln
+   
+<img width="694" height="494" alt="image" src="https://github.com/user-attachments/assets/fedd5773-9c80-4e35-b1e9-485275a22b80" />
+
+When Wp/Lp = 4 Wn/Ln
+  
+<img width="686" height="494" alt="image" src="https://github.com/user-attachments/assets/14f9d4d0-266b-4307-bd62-d004d82a6ad3" />
+
+And when Wp/Lp = 5 Wn/Ln
+  
+<img width="886" height="508" alt="image" src="https://github.com/user-attachments/assets/5b7f16df-9837-45a8-9b2e-3d48e33b2f5f" />
+
+Vm is increasing for the increasing value of width of PMOS transistors as the PMOS has become more stronger and it needs more current to charge the output load    capacitor.
+   
+<img width="678" height="227" alt="image" src="https://github.com/user-attachments/assets/ea52289b-4a74-47ce-bc10-fffee8ffb6b6" />
+
+Rise delay decreases with increase in PMOS width, this shows the time required to charge the output capacitor decreases significantly this is because we have a bigger area.
+
+## L6 Applications of CMOS inverter in clock network and STA
+
+<img width="1125" height="278" alt="image" src="https://github.com/user-attachments/assets/809717a9-f28a-4322-b833-ad95ba9127de" />
+
+Key obseravations of the L5 experiments :
+ 
+During fabrication, there can be slight variation in sizes of PMOS and NMOS from the required one, but the robustness of CMOS inverter is such that, there is not much difference in the Vm with change in sizes.
+
+RISE-FALL delay being approximately equal for Wp/Lp = 2 Wn/Ln, shows "Symmetry" of CMOS inverter. This is a typical characteristic of Clock Inverter/buffer where we want the rise delay and fall delay to be equal.
+
+<img width="1257" height="680" alt="image" src="https://github.com/user-attachments/assets/47e623e1-7e40-4827-9a4e-34b718741935" />
+
+<img width="1059" height="287" alt="image" src="https://github.com/user-attachments/assets/8fdbd4a8-c86e-43e3-93f4-9e13b8ea35d3" />
+
+<img width="1244" height="667" alt="image" src="https://github.com/user-attachments/assets/c0d1d632-3ac9-45bd-9d65-8f6585d44f3d" />
 
 
 
