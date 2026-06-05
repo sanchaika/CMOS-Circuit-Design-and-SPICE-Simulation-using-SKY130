@@ -270,6 +270,7 @@ To check the value of Id for corresponding Vds and Vgs, just left click and see.
 
 <img width="292" height="125" alt="Screenshot 2026-06-05 080253" src="https://github.com/user-attachments/assets/506470b5-cec5-42d9-bc9a-ea747aab9246" />
 
+## L5 SPICE Lab with sky130 models
 
 
 
@@ -351,10 +352,25 @@ Observation 2 - The saturation current for lower nodes is low instead of being h
 <img width="1274" height="561" alt="Screenshot 2026-06-05 093531" src="https://github.com/user-attachments/assets/545421cc-182c-4f35-916a-7b36d9db1d55" />
 
 ## L5 Labs Sky130 Id-Vgs
+We will now do simulation for lower nodes. Inside day2 design file.
 
+<img width="1537" height="639" alt="WhatsApp Image 2026-06-05 at 4 06 37 PM" src="https://github.com/user-attachments/assets/94aad723-7e00-4e31-85c7-1ef1b4b11a58" />
+
+The above plot is Id vs Vds for different values of Vgs. We can see for lower values of Vgs it is showing quadratic behaviour and for higher values of Vgs it is showing Linear behaviour. Now if want to see the peak current for Vgs=1.8V, just 'press' left click on mouse at Vgs=1.8V.
+So we can see it is approximately 198uA.
+ 
+<img width="1461" height="645" alt="WhatsApp Image 2026-06-05 at 4 06 37 PM (1)" src="https://github.com/user-attachments/assets/0a78bf5f-f18e-4e0f-8762-666d37e04d73" />
 
 ## L6 Labs Sky130 Vt
+Now we will calculate Threshold Voltage Vt for Id vs Vgs curve.
 
+<img width="917" height="742" alt="WhatsApp Image 2026-06-05 at 4 07 10 PM" src="https://github.com/user-attachments/assets/f814659d-0fa8-4c4d-8029-592a0c05ac97" />
+
+<img width="1111" height="638" alt="WhatsApp Image 2026-06-05 at 4 07 11 PM" src="https://github.com/user-attachments/assets/6f5ebaf1-83e8-4cbd-ac9e-55414d3e2b65" />
+
+In the curve we can see that Vt is the value when current increases drastically for small change in Vgs. To calculate we will draw tangent on the curve and see where it touches.
+
+It comes at around 0.76V.
 
 ## CMOS voltage transfer characteristics (VTC)
 ## L1 MOSFET as a switch
