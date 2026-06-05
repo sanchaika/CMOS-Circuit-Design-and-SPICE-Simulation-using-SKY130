@@ -647,3 +647,108 @@ Also we come to know the ranges for "Digital design" and "Analog design" in the 
 ## L5 Sky130 Noise margin labs
 We will now plot Noise margins
 
+
+
+## DAY 5 - CMOS power supply and device variation robustness evaluation
+
+## Static behavior evaluation – CMOS inverter robustness – Power supply variation
+## L1 Smart SPICE simulation for power supply variations
+ 
+As technology scales, the supply voltage is reduced to lower power consumption.
+
+To study the robustness of the CMOS inverter, the supply voltage was varied from 1.8 V to lower values while observing the Voltage Transfer Characteristics (VTC). Ideally, reducing the supply voltage should not significantly alter the inverter's switching behavior.
+ 
+<img width="1123" height="685" alt="image" src="https://github.com/user-attachments/assets/7e63fe80-ab67-4325-b88a-a9734fec652c" />
+
+
+<img width="808" height="449" alt="image" src="https://github.com/user-attachments/assets/4f862ac7-e3e7-4465-be17-032b5c9d0c7d" /> 
+ 
+Here we will do some scripting under ".control" and ".endc" . All the other commands will remain same as they were previously.
+
+<img width="738" height="563" alt="image" src="https://github.com/user-attachments/assets/031eafef-bc6d-4655-8195-8560f5225971" />
+ 
+The above plot shows the changes in CMOS curves as we chnage the supply voltages while the width of the channel is kept constant.
+
+## L2 Advantages and disadvantages using low supply voltage
+<img width="876" height="543" alt="image" src="https://github.com/user-attachments/assets/0f4eab6a-1791-4b56-ab0b-18d3e522ddd8" />
+<img width="907" height="553" alt="image" src="https://github.com/user-attachments/assets/ddc4de95-459c-4ca8-964b-993b8b6d22f5" />
+
+<img width="623" height="183" alt="image" src="https://github.com/user-attachments/assets/48546de0-3a46-47fe-b082-4ee30d3b441f" />
+
+Along with the advantages of operation at 0.5v over 2.5, there are also certain disadvantages. that's why it 0.5V is not commmonly used in operating devices.
+
+<img width="958" height="547" alt="image" src="https://github.com/user-attachments/assets/28f44eb1-e720-4f2d-bbcc-d4b350e7110e" />
+
+The main disadvantage is the rise and fall delay due to which load capacitance doesn't even get enough time for charging and dischanging.
+This causes major performance impact.
+
+## L3 Sky130 Supply Variation Labs
+
+
+## Static behavior evaluation – CMOS inverter robustness – Device variation
+## L1 Sources of variation – Etching process
+
+During fabrication, the gate dimensions may change. Etching is one of the sources of variation.
+
+<img width="1147" height="619" alt="image" src="https://github.com/user-attachments/assets/37cb71a9-e050-495c-a263-009a93182a9c" />
+
+For a single inverter layout, we see the length of gate, the width(common area between polysilicon and diffusion). Due to etching process there can be a variation in length and width of CMOS.
+
+<img width="1269" height="648" alt="image" src="https://github.com/user-attachments/assets/b55b6457-d26b-4cd3-8ea7-09bc3ae0c729" />
+
+<img width="1253" height="671" alt="image" src="https://github.com/user-attachments/assets/35733311-c5f3-47d9-9e94-a9164f27246e" />
+
+We will get a very different kind of distorted structure at the leftmost side to the rightmost side of the chain imverters.
+While the middle portion structure remains the same.
+
+The variation in L and W can change the drain current of CMOS inverter.
+
+<img width="912" height="604" alt="image" src="https://github.com/user-attachments/assets/551d4356-121a-4146-8944-3f020c583a30" />
+
+## L2 Sources of variation – oxide thickness
+
+Oxide thickness is another source of variation.
+Here is the cross sectional view of the mosfet:
+
+<img width="967" height="544" alt="image" src="https://github.com/user-attachments/assets/dd9df165-c4d9-4256-b8c1-132879d9d0c5" />
+
+The oxide under polysilicon gate, while fabricating the thickness can vary. There is a difference between ideal thickness and actual thickness.
+Similar to the previous case, the variation in structure at the left and right most side is more. While the middle portion structure remains the same.
+
+<img width="1293" height="625" alt="image" src="https://github.com/user-attachments/assets/65c43d3f-57cc-44f9-b6c7-e3bd0652fc33" />
+
+<img width="766" height="106" alt="image" src="https://github.com/user-attachments/assets/028a1c7c-1bf0-49c3-83a3-2f7ef36bd845" />
+
+## L3 Smart SPICE simulation for device variations
+Now we have to see how does the change in drain current affects the behaviour of the CMOS.
+Ideally it should be least responsive towards the device variations.
+We will experimentally see the dc curve variations with respect to the device variations.
+
+<img width="1128" height="503" alt="image" src="https://github.com/user-attachments/assets/9373674b-a1ed-482d-a1da-3a193bc42226" />
+
+Strong PMOS means it has the least resistance value 
+Weak NMOS means it has the highest resistance value.
+And vice versa.
+
+<img width="521" height="453" alt="image" src="https://github.com/user-attachments/assets/203972a5-fd2f-4d47-ad4b-d83624be1c5d" />
+
+<img width="701" height="433" alt="image" src="https://github.com/user-attachments/assets/8f439d9e-8b7a-4687-9ea0-5c56cb7268ca" />
+
+<img width="737" height="573" alt= "image" src="https://github.com/user-attachments/assets/895b9014-d52d-4fc1-b93c-cd85e5974e8a" />
+
+ ## L4 Conclusion
+ Here, we will be looking for two parameters to study the robustness of CMOS inverter :
+-Noise margin
+-Switching threshold
+
+<img width="1088" height="537" alt="image" src="https://github.com/user-attachments/assets/3f818b33-ea80-44e8-8821-f219416d1c0a" />
+
+The Switching threshold 'Vm' is shifted right in case of strong PMOS and shifted left in case of Strong NMOS.
+
+<img width="950" height="532" alt="image" src="https://github.com/user-attachments/assets/15de20c8-d5a0-499d-ae17-5c23f81caf1b" />
+
+As we see there is not much variation in Noise Margins in both the extreme cases, that means it behaves as a robust inverter in both the cases.
+
+### L5 Sky130 Device Variation Labs
+
+
