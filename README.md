@@ -258,10 +258,106 @@ Now, we need to sweep the Vgs and Vds for SPICE simulations.
 
 To check the value of Id for corresponding Vds and Vgs, just left click and see.
 
-<img width="298" height="118" alt="Screenshot 2026-06-05 075853" src="https://github.com/user-attachments/assets/207994ca-65c9-4aa1-b9b0-3c9ae2ec84c9" />
+<img width="292" height="125" alt="Screenshot 2026-06-05 080253" src="https://github.com/user-attachments/assets/506470b5-cec5-42d9-bc9a-ea747aab9246" />
 
 
 
+
+# NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
+## SPICE simulation for lower nodes and velocity saturation effect
+## L1 SPICE simulation for lower nodes
+This curve is from previous SPICE simulation in which Id is at y-axis and Vds is at x-axis
+
+<img width="1219" height="733" alt="Screenshot 2026-06-05 082454" src="https://github.com/user-attachments/assets/10446a2f-2cc6-47d3-930e-314be5bbfd50" />
+
+the above graph the area left of curve; Vds=Vgs-Vt is Linear region as current is increasing linearly, the area right is Saturation region with slight increase in current due to velocity saturation and below is the Cut off region.Also this case is when the channel length is large.
+
+Now we are taking different W and L, but the ration of W/L is same as previous, so the Id should not change. But this is not the case practically.
+
+Below is the spice deck, where only the values of W and L is changed, rest everything remains same.
+
+<img width="787" height="486" alt="Screenshot 2026-06-05 083333" src="https://github.com/user-attachments/assets/d164e057-a7fe-40cd-8d80-1c258515bea6" />
+
+## L2 Drain current vs gate voltage for long and short channel device
+Now we are comparing between Long and Short channel device
+
+<img width="1341" height="715" alt="Screenshot 2026-06-05 082845" src="https://github.com/user-attachments/assets/6d0fe567-63ec-4d3f-b8b5-3946e808be0f" />
+
+Some of the observations are:
+1. If we see Id values for different Vgs and for Vds=2.5V, there is a quadratic dependency of Id on Vgs. Whereas for short channel device, at Vds=2.5V, the current is increasing linearly due to velocity saturation.
+
+<img width="1350" height="735" alt="Screenshot 2026-06-05 085153" src="https://github.com/user-attachments/assets/c4390ca0-2275-4861-82df-d2a1eae3bcbe" />
+
+Now we will plot graph of Id vs Vgs and sweeping Vds or keeping Vds constant = 2.5V.
+
+<img width="788" height="491" alt="Screenshot 2026-06-05 091608" src="https://github.com/user-attachments/assets/4f4dba9b-5359-478c-884d-a39203f5a998" />
+
+syntax explains that what will be there on left hand side will be sweeped at every value on right hand side. For example here for every value of Vdd, Vin will be sweeped. The plot we get is quadratic, it is only when Vds=2.5V 
+
+<img width="554" height="442" alt="Screenshot 2026-06-05 091641" src="https://github.com/user-attachments/assets/ee39e779-6ccd-4600-a80e-f5c3984aedd3" />
+
+velocity saturation: is a phenomenon that occurs in short-channel MOSFETs when the electric field in the channel becomes very high.
+
+<img width="1357" height="668" alt="Screenshot 2026-06-05 090333" src="https://github.com/user-attachments/assets/0f81471d-5f82-4030-9530-1a67e5abb93f" />
+
+## L3 Velocity saturation at lower and higher electric fields
+For short channel we will see more of a linear behaviour as the Vgs increases. This is due to velocity saturation effect.
+
+<img width="986" height="488" alt="Screenshot 2026-06-05 092209" src="https://github.com/user-attachments/assets/a756b1e8-ceb5-40b1-b728-13c93aae4edf" />
+
+We know velocity and electric field are related to each other with equation v=uE, where v is velocity, E is electric field and u is mobility. Velocity increases linearly with electric field over certain electric field value after which it gets saturated. This is due to scattering at higher fields and mobility decreases. 
+
+<img width="891" height="471" alt="Screenshot 2026-06-05 092308" src="https://github.com/user-attachments/assets/4cc40e7b-d9f5-4d4e-b479-eb8960d22551" />
+
+Velocity saturation happens for higher gate-source voltages.
+
+<img width="925" height="438" alt="Screenshot 2026-06-05 092332" src="https://github.com/user-attachments/assets/119799a3-a545-4a39-8ca2-20de74831052" />
+
+<img width="949" height="418" alt="Screenshot 2026-06-05 092410" src="https://github.com/user-attachments/assets/fa7b0b01-5235-463b-9931-8d87687fc1b3" />
+
+## L4 Velocity saturation drain current model
+Let us take Vgs-Vt=Vgt because we will be taking Vgs as large values. Current equation we will be using as shown above, For lower values of Vds we will neglect the 'lambda' term.
+
+There is one more technology paramter which is "Vdsat", it is the velocity of gate when the device just enters the Velocity saturation region.
+
+<img width="820" height="190" alt="Screenshot 2026-06-05 092923" src="https://github.com/user-attachments/assets/2823e681-b37d-4051-834c-3d8dde8bbdd9" />
+
+Saturation region:
+
+<img width="995" height="523" alt="Screenshot 2026-06-05 092959" src="https://github.com/user-attachments/assets/14c3f128-99e2-48b8-9417-bb8b7067277d" />
+
+Resistive region:
+
+<img width="1043" height="526" alt="Screenshot 2026-06-05 093011" src="https://github.com/user-attachments/assets/3ac59572-cdd7-4f0a-85f7-fc9a6473c67b" />
+
+Veocity Saturation region:
+
+<img width="1200" height="573" alt="Screenshot 2026-06-05 093057" src="https://github.com/user-attachments/assets/c49219dc-7a8b-4e9d-86ae-21bb3da75ec5" />
+
+In the above equation, it seems when W is constant and L is lowered then Id should increase, But it is not so practically.
+
+Observation 2 - The saturation current for lower nodes is low instead of being high. This is because Velocity saturation tends to saturate the device early so the peak current we see for lower nodes is much lesser than for higher nodes. 
+
+<img width="1274" height="561" alt="Screenshot 2026-06-05 093531" src="https://github.com/user-attachments/assets/545421cc-182c-4f35-916a-7b36d9db1d55" />
+
+## L5 Labs Sky130 Id-Vgs
+
+
+## L6 Labs Sky130 Vt
+
+
+## CMOS voltage transfer characteristics (VTC)
+## L1 MOSFET as a switch
+We will now look at the device parameters from the switch point of view.
+
+<img width="877" height="360" alt="Screenshot 2026-06-05 094159" src="https://github.com/user-attachments/assets/29bfcea8-0d15-41ea-bc35-ea7afa029b56" />
+
+When |Vgs|<Vt, device is OFF and it acts as open switch
+When |Vgs|>Vt, device is ON and it acts as closed switch
+
+<img width="1082" height="591" alt="image" src="https://github.com/user-attachments/assets/4ab676ad-bf29-42e3-bddd-438e51d3ed40" />
+
+## L2 Introduction to standard MOS voltage current parameters
 
 
 
