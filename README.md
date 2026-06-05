@@ -271,8 +271,9 @@ To check the value of Id for corresponding Vds and Vgs, just left click and see.
 <img width="292" height="125" alt="Screenshot 2026-06-05 080253" src="https://github.com/user-attachments/assets/506470b5-cec5-42d9-bc9a-ea747aab9246" />
 
 ## L5 SPICE Lab with sky130 models
+If we go inside models folder, we will see all.spice file. If we open it we will see the scale of Width and Length.
 
-
+<img width="927" height="566" alt="image" src="https://github.com/user-attachments/assets/6ca24617-4111-41d1-8db7-dc634fd4f66e" />
 
 # NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
 ## SPICE simulation for lower nodes and velocity saturation effect
@@ -357,6 +358,7 @@ We will now do simulation for lower nodes. Inside day2 design file.
 <img width="1537" height="639" alt="WhatsApp Image 2026-06-05 at 4 06 37 PM" src="https://github.com/user-attachments/assets/94aad723-7e00-4e31-85c7-1ef1b4b11a58" />
 
 The above plot is Id vs Vds for different values of Vgs. We can see for lower values of Vgs it is showing quadratic behaviour and for higher values of Vgs it is showing Linear behaviour. Now if want to see the peak current for Vgs=1.8V, just 'press' left click on mouse at Vgs=1.8V.
+
 So we can see it is approximately 198uA.
  
 <img width="1461" height="645" alt="WhatsApp Image 2026-06-05 at 4 06 37 PM (1)" src="https://github.com/user-attachments/assets/0a78bf5f-f18e-4e0f-8762-666d37e04d73" />
@@ -505,8 +507,16 @@ And, SPICE waveform :  Wn= 0.375u, Wp= 0.9375u, Ln,p=0.25u; Wn/Ln=1.5, Wp/Lp=2.5
 Observation :  the previous graph is left shifted slightly. This happens because NMOS is more stronger than PMOS in previous graph.
 
 ## L3 Labs Sky130 SPICE simulation for CMOS
+We now get the VTC characteristics
+are using both pfet and nfet for CMOS inverter. We can see that W/L ratio of pmos is 2.33 times greater than that of nmos. And we will be sweeping Vin from 0 to 1.8V with step isze of 0.01V and plotting the Vout.
 
-<img width="863" height="718" alt="image" src="https://github.com/user-attachments/assets/22bfe93d-23ec-458c-b39d-92d4b1dc6809" />
+<img width="750" height="804" alt="WhatsApp Image 2026-06-05 at 4 13 10 PM" src="https://github.com/user-attachments/assets/fee71f9f-e058-49a9-ad1c-bbb62f63f8c5" />
+
+get the plot type ngspice and plot out vs in.
+
+<img width="941" height="801" alt="WhatsApp Image 2026-06-05 at 4 13 10 PM (2)" src="https://github.com/user-attachments/assets/d809e5c4-d136-4d55-a79f-b787dbe59730" />
+
+<img width="1134" height="650" alt="WhatsApp Image 2026-06-05 at 4 13 10 PM (1)" src="https://github.com/user-attachments/assets/a5360021-78d4-4a49-9afb-718e4404d6fe" />
 
 ## Static behavior evaluation – CMOS inverter robustness – Switching Threshold
 ##  L1 Switching Threshold, Vm
@@ -663,10 +673,19 @@ Also we come to know the ranges for "Digital design" and "Analog design" in the 
 ## L5 Sky130 Noise margin labs
 We will now plot Noise margins
 
+<img width="705" height="796" alt="WhatsApp Image 2026-06-05 at 4 23 16 PM" src="https://github.com/user-attachments/assets/a4f58aa7-bf99-4884-9aac-ddd9739273a4" />
 
+<img width="1192" height="809" alt="WhatsApp Image 2026-06-05 at 4 23 15 PM (1)" src="https://github.com/user-attachments/assets/67a88256-dae5-4975-a3ba-6d148d7024a9" />
+
+<img width="1026" height="612" alt="WhatsApp Image 2026-06-05 at 4 23 15 PM" src="https://github.com/user-attachments/assets/9feda09b-c469-462e-b2e4-9930ac135ec6" />
+
+<img width="272" height="52" alt="image" src="https://github.com/user-attachments/assets/9f3a6d83-0c0d-4cea-a8e9-8462a4270df0" />
+
+We will take the point where the slope is -1 ; x axis will give VIL and VIH, whereas y axis will give VOH and VOL.
+Noise margin NH = VOH - VIH = 1.70952-0.98778 = 0.72 
+Noise margin NL = VIL - VOL = 0.7733-0.09523 = 0.67807
 
 ## DAY 5 - CMOS power supply and device variation robustness evaluation
-
 ## Static behavior evaluation – CMOS inverter robustness – Power supply variation
 ## L1 Smart SPICE simulation for power supply variations
  
@@ -699,7 +718,27 @@ The main disadvantage is the rise and fall delay due to which load capacitance d
 This causes major performance impact.
 
 ## L3 Sky130 Supply Variation Labs
+We will calculate the supply variation.
 
+<img width="1600" height="770" alt="WhatsApp Image 2026-06-05 at 4 30 33 PM" src="https://github.com/user-attachments/assets/e460fdd0-faf7-4379-9372-e26413a00840" />
+
+The initial supply voltage is 1.8V and we are reducing it with the step of 0.2V, so there will be 6 iterations.
+
+<img width="1111" height="812" alt="WhatsApp Image 2026-06-05 at 4 30 33 PM (1)" src="https://github.com/user-attachments/assets/b084aad7-07e8-4ce4-a5f3-bf7bd5d695bd" />
+
+<img width="1277" height="702" alt="WhatsApp Image 2026-06-05 at 4 30 33 PM (2)" src="https://github.com/user-attachments/assets/f1c1cb13-655b-4727-9e5c-3c72b9ef0618" />
+
+will calculte the Gain: 
+1. Vdd=1.8V
+
+<img width="275" height="51" alt="image" src="https://github.com/user-attachments/assets/49f5aaf2-cc54-4c53-80a6-ac48afb433a1" />
+
+|Gain| = 7.6229 
+2. Vdd=0.8V
+
+<img width="268" height="50" alt="image" src="https://github.com/user-attachments/assets/ec3acea8-f2e1-4a7e-89e3-411c9bb48753" />
+
+|Gain| = 9.3844 
 
 ## Static behavior evaluation – CMOS inverter robustness – Device variation
 ## L1 Sources of variation – Etching process
@@ -765,6 +804,18 @@ The Switching threshold 'Vm' is shifted right in case of strong PMOS and shifted
 
 As we see there is not much variation in Noise Margins in both the extreme cases, that means it behaves as a robust inverter in both the cases.
 
-### L5 Sky130 Device Variation Labs
+## L5 Sky130 Device Variation Labs
+We will now do the SPICE simulations for the device variations
 
+<img width="1024" height="800" alt="WhatsApp Image 2026-06-05 at 4 36 54 PM" src="https://github.com/user-attachments/assets/df729b53-a208-40e0-9c04-7e47a62d3fae" />
+
+We can see that the width of PMOS is quite large than that of NMOS. SO it is clearly strong PMOS and weak NMOS case. The Vm will be right shifted.
+
+<img width="1113" height="805" alt="WhatsApp Image 2026-06-05 at 4 36 53 PM" src="https://github.com/user-attachments/assets/a7a865e8-178a-4f23-ba1a-692eaa13492c" />
+
+<img width="1055" height="742" alt="WhatsApp Image 2026-06-05 at 4 36 53 PM (1)" src="https://github.com/user-attachments/assets/41772683-4206-4976-9a5e-5c0f892acb05" />
+
+
+## Results
+Simulation waveforms and observations are included in this repository.
 
